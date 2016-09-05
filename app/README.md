@@ -14,7 +14,7 @@ The first method is simply to mount an application or directory from the host wh
     ```bash
     $ docker-machine scp ServletApp.war $(docker-machine active):/tmp/ServletApp.war
     ```
-3. Use the following command to run a container with WebSphere Liberty:
+3. Ensure port 9080 is available and then use the following command to run a container with WebSphere Liberty:
 
     ```bash
     $ docker run -d -p 80:9080 --name=app -v /tmp/ServletApp.war:/config/dropins/app.war websphere-liberty
