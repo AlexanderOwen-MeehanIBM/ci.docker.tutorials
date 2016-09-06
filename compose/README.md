@@ -103,8 +103,11 @@ Note that it defines two services: web and db and links them together.
 7. Execute the following commands to demonstrate that the two Liberty containers are using the same MongoDB instance:
 
     ```bash
-    $ curl $(docker-compose port --index=1 web 9080)/mongoDBApp
-    $ curl $(docker-compose port --index=2 web 9080)/mongoDBApp
+    $ IP=$(docker-machine ip $(docker-machine active))
+    $ PORT1=$(docker-compose port --index=1 web 9080)
+    $ PORT2=$(docker-compose port --index=2 web 9080)
+    $ curl $IP:${PORT1#*:}/mongoDBApp
+    $ curl $IP:${PORT2#*:}/mongoDBApp
     ```
 You should see that the two application instances are serving data from the same MongoDB database with the second command returning the users created by the first command plus ten more.
 
