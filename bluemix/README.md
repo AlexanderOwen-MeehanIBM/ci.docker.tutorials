@@ -4,6 +4,8 @@ In this tutorial you will take the same sample application used in the [Working 
 
 To complete this tutorial you will need an IBM ID registered with IBM Bluemix. If you do not have an IBM ID, or have not signed up for Bluemix, and wish to complete this section of the lab then sign up for a [free 30-day trial](https://console.ng.bluemix.net/registration/). You will then need the [Cloud Foundry CLI](http://docs.cloudfoundry.org/cf-cli/install-go-cli.html) with the [IBM Containers plug-in](https://console.ng.bluemix.net/docs/containers/container_cli_cfic.html) installed.
 
+####Note: The urls listed here refer to the US site. If you are in the UK please change 'ng' to 'eu-gb'; if you are in Sydney please change 'ng' to 'au-syd'.
+
 1. Log in IBM Bluemix using the Cloud Foundry CLI. You will be prompted to provide your IBM ID and password.
 
     ```bash
@@ -40,27 +42,28 @@ Note: When the init command is run you will be presented with two options. Optio
     ```bash
     $ cat Dockerfile
     ```
-8. Build the app in IBM Containers, remembering to insert your namespace once again:
+8. Open the Dockerfile in a text editor and change the url to the one appropriate to your region.
+9. Build the app in IBM Containers, remembering to insert your namespace once again:
 
     ```bash
     $ cf ic build -t registry.ng.bluemix.net/<namespace>/app .
     ```
-9. Run the app that you just built, linking the mongodb container.
+10. Run the app that you just built, linking the mongodb container.
 
     ```bash
     $ cf ic run -d --link mongodb:db -p 80:9080 --name app registry.ng.bluemix.net/<namespace>/app
     ```
-10. Check all the containers are up and running:
+11. Check all the containers are up and running:
 
     ```bash
     $ cf ic ps
     ```
-11. Access the application using the allocated IP address.
+12. Access the application using the allocated IP address.
 
     ```bash
     $ curl $(cf ic port app 9080)/mongoDBApp
     ```
-10. Clean up the containers and images with the following commands:
+13. Clean up the containers and images with the following commands:
 
     ```bash
     $ cf ic kill $(cf ic ps -aq)
